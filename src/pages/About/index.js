@@ -1,12 +1,10 @@
 import React from "react";
-import {View, Text} from 'react'
+import {View, Text} from "react-native";
 
-function Mais(){
+export function About(){
     return(
         <View>
             <Text>olaa</Text>
         </View>
     )
 }
-
-export default Mais;
