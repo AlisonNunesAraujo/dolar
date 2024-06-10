@@ -1,27 +1,46 @@
-import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, View, StyleSheet, Modal,StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+
+import Detalhes from "../Detalhes";
+
+
+
 
 export function Dados(props) {
 
-  const navigation = useNavigation();
+  const [Modalvisible, setModal] = useState(false)
 
-  function navigateWithProps() {
-    navigation.navigate("More", props.data);
-  }
+ function verMais(){
+  setModal(true)
+ }
+
+ function fechar(){
+  setModal(false)
+ }
+
+ 
 
   return (
     <View style={styles.bloco}>
       <Text style={{ color: "white", fontSize: 15, fontWeight: "700" }}>
-        Dolar em tempo real!
+        Valor em tempo real!
       </Text>
       <Text style={styles.valor}> R$ {props.data.ask}</Text>
       <Text style={styles.descricao}>{props.data.name}</Text>
-      <TouchableOpacity style={styles.button} onPress={navigateWithProps}>
+      <TouchableOpacity style={styles.button} onPress={verMais}>
         <Text style={styles.textobutton}>VER MAIS</Text>
       </TouchableOpacity>
+
+      <Modal animationType='slide' visible={Modalvisible}>
+        <Detalhes fechar={fechar}/>
+      </Modal>
+
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   bloco: {
@@ -29,7 +48,8 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     borderRadius: 10,
     padding: 10,
-    marginBottom: 20
+    marginBottom: 20,
+   
   },
   valor: {
     color: "white",
